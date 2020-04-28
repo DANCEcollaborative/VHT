@@ -3,7 +3,9 @@ import java.io.*;
 import edu.usc.ict.vhmsg.*;
 import vhMsgProcessor.*;
 
-// Send the VHmsg as needed,both text and NVB message.
+/*
+ * Send the VHmsg as needed,both text and NVB message.
+ */
 public class VHSender {
 
     public static VHMsg vhmsg;
@@ -16,12 +18,11 @@ public class VHSender {
     NVBMsgProcessor nvbMsg = new NVBMsgProcessor();
     TextMsgProcessor textMsg = new TextMsgProcessor();
 
+    /*
+     * get the name of current Char in the VHT
+     */
     public void setChar(String name) {
         this.name = name;
-    }
-    
-    public void setMsgType(String msgtype) {
-        this.msgtype = msgtype;
     }
 
     private boolean kbhit()
@@ -52,6 +53,15 @@ public class VHSender {
         System.out.println( "VHSender Created" );
     }
 
+    /*
+     * Send the text or Non-verbal behavior(NVB) message basing 
+     * @param name : String
+     * name of the Char
+     * @param content : String
+     * the content received from PSI
+     * @param msgtype : String
+     * the message type of the received message(text/nvb)
+     */
     public void sendMessage(String name, String content, String msgtype) {
         if (msgtype.equals("text")) {
         	vhmsg.sendMessage(textMsg.constructTextMsg(name, content));
@@ -61,6 +71,13 @@ public class VHSender {
         }    	
     }
     
+    /*
+     * Send the text or Non-verbal behavior(NVB) message basing 
+     * @param content : String
+     * the content received from PSI
+     * @param msgtype : String
+     * the message type of the received message(text/nvb)
+     */
     public void sendMessage(String content, String msgtype) {
         if (msgtype.equals("text")) {
         	vhmsg.sendMessage(textMsg.constructTextMsg(this.name, content));

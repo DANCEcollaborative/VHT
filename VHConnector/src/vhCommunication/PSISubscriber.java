@@ -2,8 +2,11 @@ package vhCommunication;
 
 import smartlab.communication.ISLTextSubscriber;
 import vhMsgProcessor.*;
+/*
+ * Subscriber the message from PSI.
+ */
 
-public class psiNvbSubscriber implements ISLTextSubscriber{
+public class PSISubscriber implements ISLTextSubscriber{
 	String name;
 	VHSender sender = new VHSender();
 	RendererController controller = new RendererController();
@@ -12,14 +15,22 @@ public class psiNvbSubscriber implements ISLTextSubscriber{
     TextMsgProcessor textMsg = new TextMsgProcessor();
 	
 
-    public psiNvbSubscriber(String name) {
+    public PSISubscriber(String name) {
         this.name = name;
     }
 
+
     @Override
+    /*
+     * @param topic : String
+     * the message topic in ActiveMQ.
+     * @param content £º String
+     * the text content from PSI
+     */
+    
     public void onReceive(String topic, String content) {
 
-    	sender.setChar(controller.getCharacter());    
+    	sender.setChar(controller.getCharacter());    	
 		String type = vhp.typeGetter(content);
 		String identity = vhp.identityGetter(content);
 		//String angle = nvbMsg.angleGetter(content);

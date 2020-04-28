@@ -62,6 +62,7 @@ public class VHMsgSpliter {
 		
 	}
 	
+	//get the text information if this message is from bazaar.	
 	public String textGetter (String s) {		
 		Pattern pattern = Pattern.compile("(?<=;%;text:)[\\s\\S]*$");
 		Matcher matcher = pattern.matcher(s);
@@ -78,6 +79,7 @@ public class VHMsgSpliter {
 		
 	}
 	
+	//get the coordinate information if this message is a multi-modal message.	
 	public String[] coordinateGetter(String s) {
 		Pattern pattern = Pattern.compile("(?<=;%;location:)[\\s\\S]*$");
 		Matcher matcher = pattern.matcher(s);

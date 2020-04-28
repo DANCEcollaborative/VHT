@@ -1,5 +1,8 @@
 package vhMsgProcessor;
 
+/*
+ * Processing the text message that revieved from PSI
+ */
 public class TextMsgProcessor {
 	VHMsgSpliter vhmsgspliter = new VHMsgSpliter();
 
@@ -8,6 +11,8 @@ public class TextMsgProcessor {
 		System.out.println( "TextMsgProcessor Created!" );
 		// TODO Auto-generated constructor stub
 	}
+	
+    //send the text message from Bazaar to VHT through VrExpress
     public String constructTextMsg(String name, String content) {
     	String s = vhmsgspliter.textGetter(content);
         if (name.equals("Rachel")) {

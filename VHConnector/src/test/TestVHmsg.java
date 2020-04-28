@@ -3,7 +3,7 @@ import smartlab.communication.CommunicationManager;
 import vhCommunication.RendererController;
 import vhCommunication.VHReceiver;
 import vhCommunication.VHSender;
-import vhCommunication.psiNvbSubscriber;
+import vhCommunication.PSISubscriber;
 import vhMsgProcessor.NVBMsgProcessor;
 import vhMsgProcessor.TextMsgProcessor;
 import vhMsgProcessor.VHMsgSpliter;
@@ -20,7 +20,7 @@ public class TestVHmsg {
 		VHMsgSpliter vhp = new VHMsgSpliter();
 	    NVBMsgProcessor nvbMsg = new NVBMsgProcessor();
 	    TextMsgProcessor textMsg = new TextMsgProcessor();
-		String s = "send message to : multimodal:true;%;identity:someone;%;location:00:60:55.0";
+		String s = "send message to : multimodal:false;%;identity:someone;%;text:ddddd";
 		String type = vhp.typeGetter(s);
 		String identity = vhp.identityGetter(s);
 		String[] coordinate = vhp.coordinateGetter(s);

@@ -5,6 +5,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.math.*;
 import vhMsgProcessor.VHMsgSpliter;
+
+/*
+ * Processing the non-verbal behavior (NVB) that revieved from PSI
+ */
 public class NVBMsgProcessor {
 
 	public String msgtype;
@@ -17,6 +21,10 @@ public class NVBMsgProcessor {
 		System.out.println( "NVBMsgProcessor Created!" );
 	}
 	
+	/*
+	 * @param content :String
+	 * content of received the message
+	 */
 	public NVBMsgProcessor(String content) {
 		this.msgtype = vhmsgspliter.typeGetter(content);
 		this.identity = vhmsgspliter.identityGetter(content);
@@ -24,6 +32,11 @@ public class NVBMsgProcessor {
 		System.out.println( "NVBMsgProcessor Created!" );
 	}
 	
+	/*
+	 * Get the position of the gaze
+	 * @param content :String
+	 * content of received the message
+	 */
 	public String angleGetter(String content) {
 		double[] rowangle = angleCalculate(content);
 		String angle = String.valueOf(rowangle[0])+" "+String.valueOf(rowangle[1])+" "+String.valueOf(rowangle[2]);

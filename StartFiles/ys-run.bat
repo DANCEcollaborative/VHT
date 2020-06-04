@@ -1,6 +1,5 @@
 @echo off
 start java -jar VHlauncher.jar Rachel
-start java -jar VHConnector.jar
 pushd bin\launch-scripts
 call run-toolkit-logger.bat
 rem call run-toolkit-character-customizer.bat 

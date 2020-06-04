@@ -68,7 +68,7 @@ public class VHMsgSpliter {
 	
 	//get the text information if this message is from bazaar.	
 	public String textGetter (String s) {		
-		Pattern pattern = Pattern.compile("(?<=;%;text:)[\\s\\S]*$");
+		Pattern pattern = Pattern.compile("(?<=;%;speech:)[\\s\\S]*$");
 		Matcher matcher = pattern.matcher(s);
 		if (matcher.find()) {
 			String text = matcher.group(0);

@@ -1,9 +1,5 @@
 package smartlab.vhcommunication;
 import java.io.*;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
-
 import edu.usc.ict.vhmsg.*;
 import smartlab.vhmsgprocessor.*;
 
@@ -71,12 +67,10 @@ public class VHSender {
      * @param msgtype : String
      * the message type of the received message(text/nvb)
      */
-    public void sendMessage(String name, String content, String msgtype) throws UnsupportedEncodingException {
+    public void sendMessage(String name, String content, String msgtype) {
         if (msgtype.equals("speech")) {
         	System.out.println("!!!!Messages to!!!!"+name+content+msgtype);
-        	String temp = textMsg.constructTextMsg(this.name, content);
-        	String s = new String(temp.getBytes("UTF-8"),"UTF-8");
-        	vhmsg.sendMessage(new String(s.getBytes("GKB"),"GKB"));
+        	vhmsg.sendMessage(textMsg.constructTextMsg(name, content));
         }
         else if (msgtype.equals("location")) {
         	vhmsg.sendMessage(nvbMsg.constructNVBMsg(name, content));
@@ -90,18 +84,9 @@ public class VHSender {
      * @param msgtype : String
      * the message type of the received message(text/nvb)
      */
-    public void sendMessage(String content, String msgtype) throws UnsupportedEncodingException {
+    public void sendMessage(String content, String msgtype) {
         if (msgtype.equals("speech")) {
-        	System.out.println("!!!!Messages to!!!!"+content+msgtype);
-        	String temp = textMsg.constructTextMsg(this.name, content);
-        	System.out.println(temp);
-		    //String s=new String(temp.getBytes("GKB"),"utf-8");
-			//System.out.println(s);*/
-            //String ufts= URLDecoder.decode(temp,"utf-8");
-            //String ufts= new String(temp.getBytes("utf-8"),"utf-8");
-        	String ufts = temp;
-            System.out.println(ufts);
-        	vhmsg.sendMessage(ufts);
+        	vhmsg.sendMessage(textMsg.constructTextMsg(this.name, content));
         }
         else if (msgtype.equals("location")) {
         	vhmsg.sendMessage(nvbMsg.constructNVBMsg(this.name, content));

@@ -1,4 +1,5 @@
 package smartlab.vhcommunication;
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -18,7 +19,12 @@ public class MessageTask implements Runnable{
 	}
 	@Override
 	public void run() {
-		sender.sendMessage(this.content, this.type);
+		try {
+			sender.sendMessage(this.content, this.type);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("Present Thread:"+Thread.currentThread().getName()+"Content is :"+this.content+"Type is :" +this.type);		
 	}
 

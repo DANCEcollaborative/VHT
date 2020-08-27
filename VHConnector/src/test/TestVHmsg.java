@@ -1,5 +1,6 @@
 package test;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import smartlab.communication.CommunicationManager;
 import smartlab.vhcommunication.PSISubscriber;
@@ -19,15 +20,22 @@ public class TestVHmsg {
 			//sender.setChar(controller.getCharacter());
 			//CommunicationManager manager = new CommunicationManager();
 			//psiNvbSubscriber textmsg = new psiNvbSubscriber("PSI_NVBG_Location");
+			// "sbm  bml char Rachel speech \"" + utfStrraw + "\"";
 			VHMsgSpliter vhp = VHMsgSpliter.getInstance();
 		    NVBMsgProcessor nvbMsg = new NVBMsgProcessor();
 		    TextMsgProcessor textMsg = new TextMsgProcessor();	
 		    String content =  "明月几时有，把酒问青天";
-		    //String ufts= URLEncoder.encode( content, "UTF8" );
+		    String utfStr = URLEncoder.encode(content,"UTF8");
+		    String utfStr123 = new String(content.getBytes("GBK"), "GBK");
+		    String name=new String(content.getBytes("UTF8"), "UTF8");
+		    //String ufts= URLEncoder.encode( content, "UTF-8");
 		    String ufts = content;
 		    String suft= "sbm  bml char Rachel speech \""+ufts+"\"";
-		    //String suft = new String(sgkb.getBytes(), "UTF-8");
-		    System.out.print("suft is"+ufts);
+		    //String suft = new String(sgkb.getBytes(),"UTF-8");
+		    System.out.println("utfStr is"+utfStr);
+		    System.out.println("utfStr123 is"+utfStr123);
+		    System.out.println("name is"+name);
+		    System.out.println("suft is"+ufts);
 			String s = "send message to : multimodal:true;%;identity:someone;%;speech:"+ufts;
 			String type = vhp.typeGetter(s);
 			String identity = vhp.identityGetter(s);

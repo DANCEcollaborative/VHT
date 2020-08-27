@@ -1,5 +1,8 @@
 package smartlab.vhcommunication;
 import java.io.*;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+
 import edu.usc.ict.vhmsg.*;
 import smartlab.vhmsgprocessor.*;
 
@@ -67,10 +70,17 @@ public class VHSender {
      * @param msgtype : String
      * the message type of the received message(text/nvb)
      */
-    public void sendMessage(String name, String content, String msgtype) {
+    public void sendMessage(String name, String content, String msgtype) throws UnsupportedEncodingException {
         if (msgtype.equals("speech")) {
         	System.out.println("!!!!Messages to!!!!"+name+content+msgtype);
-        	vhmsg.sendMessage(textMsg.constructTextMsg(name, content));
+        	String output = textMsg.constructTextMsg(name, content);
+        	System.out.println("!!!!Messages to tts!!!!"+name+output);
+        	String utfStrraw = URLEncoder.encode(output,"UTF8");
+        	String utfstr = this.replacer(utfStrraw);
+        	String utfStr1 = new String(output.getBytes("GBK"), "UTF8");
+        	System.out.println("!!!!UTF8123111 Messages to tts!!!!"+utfstr);
+        	System.out.println("!!!!UTF8111 Messages to tts!!!!"+utfStr1);
+        	vhmsg.sendMessage(utfstr);
         }
         else if (msgtype.equals("location")) {
         	vhmsg.sendMessage(nvbMsg.constructNVBMsg(name, content));
@@ -84,12 +94,30 @@ public class VHSender {
      * @param msgtype : String
      * the message type of the received message(text/nvb)
      */
-    public void sendMessage(String content, String msgtype) {
+    public void sendMessage(String content, String msgtype) throws UnsupportedEncodingException {
         if (msgtype.equals("speech")) {
-        	vhmsg.sendMessage(textMsg.constructTextMsg(this.name, content));
+        	System.out.println("!!!!Messages to!!!!"+name+content+msgtype);
+        	String output = textMsg.constructTextMsg(name, content);
+			/*        	System.out.println("!!!!Messages to tts!!!!"+name+output);
+			        	String utfStrraw = URLEncoder.encode(output,"UTF8");
+			        	String utfstr = this.replacer(utfStrraw);
+			        	String utfStr1 = new String(output.getBytes("GBK"), "UTF8");
+			        	System.out.println("!!!!UTF8123113433 Messages to tts!!!!"+utfstr);
+			        	System.out.println("!!!!UTF8111 Messages to tts!!!!"+utfStr1);*/
+        	vhmsg.sendMessage(output);
         }
         else if (msgtype.equals("location")) {
         	vhmsg.sendMessage(nvbMsg.constructNVBMsg(this.name, content));
         } 	
     }
+    
+    public static String replacer(String data) {
+        try {
+           data = data.replaceAll("%(?![0-9a-fA-F]{2})", "%25");
+           data = data.replaceAll("\\+", "%2B");
+        } catch (Exception e) {
+           e.printStackTrace();
+        }
+        return data;
+     }
 }

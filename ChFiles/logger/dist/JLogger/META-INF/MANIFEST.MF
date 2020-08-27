@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: src.view.JLogger
+Class-Path: . JLogger_lib/vhmsg-java.jar JLogger_lib/JLogger.jar
+
